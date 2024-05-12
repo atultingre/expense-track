@@ -42,6 +42,7 @@ const SideNav = () => {
         width={50}
         height={50}
         alt="logo"
+        style={{ width: "auto", height: "auto" }}
       />
       <div>
         {menuList.map((menu, index) => (

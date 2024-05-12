@@ -27,9 +27,7 @@ const BudgetList = () => {
       .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
       .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
       .groupBy(Budgets.id)
-      .orderBy(desc(Budgets.id))
-      ;
-
+      .orderBy(desc(Budgets.id));
     setBudgetList(result);
   };
 
@@ -41,7 +39,12 @@ const BudgetList = () => {
           ? budgetList.map((budget, index) => (
               <BudgetItem budget={budget} key={index} />
             ))
-          : [1, 2, 3, 4].map((item, index) => <div key={index} className="w-full bg-slate-200 rounded-lg h-[150px] animate-pulse"></div>)}
+          : [1, 2, 3, 4].map((item, index) => (
+              <div
+                key={index}
+                className="w-full bg-slate-200 rounded-lg h-[150px] animate-pulse"
+              ></div>
+            ))}
       </div>
     </div>
   );

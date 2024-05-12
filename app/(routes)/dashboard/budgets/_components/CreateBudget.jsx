@@ -17,6 +17,7 @@ import { db } from "@/utils/dbConfig";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { Budgets } from "@/utils/schema";
+import { PlusIcon } from "lucide-react";
 
 const CreateBudget = ({ refreshData }) => {
   const [emojiIcon, setEmojiIcon] = useState("😍");
@@ -47,7 +48,7 @@ const CreateBudget = ({ refreshData }) => {
       <Dialog>
         <DialogTrigger asChild>
           <div className="bg-slate-100 p-10 rounded-md items-center flex flex-col border-2 border-dashed cursor-pointer shadow hover:shadow-md ">
-            <h2 className="text-3xl">+</h2>
+            <h2 className="text-3xl"><PlusIcon/></h2>
             <h2 className="text-xl">Create New Budget</h2>
           </div>
         </DialogTrigger>
@@ -89,13 +90,6 @@ const CreateBudget = ({ refreshData }) => {
                   onChange={(e) => setAmount(e.target.value)}
                 />
               </div>
-              {/* <Button
-                disabled={!(name && amount)}
-                className="mt-5 w-full"
-                onClick={() => onCreateBudget()}
-              >
-                Create Budget
-              </Button> */}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="sm:justify-start">

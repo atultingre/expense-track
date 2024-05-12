@@ -1,5 +1,5 @@
 const Upgrade = () => {
-  return <div>Upgrade</div>;
+  return <div className="p-10">Upgrade</div>;
 };
 
 export default Upgrade;
