@@ -14,11 +14,11 @@ import EmojiPicker from "emoji-picker-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { db } from "@/utils/dbConfig";
-import { Budgets } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
+import { Budgets } from "@/utils/schema";
 
-const CreateBudget = () => {
+const CreateBudget = ({ refreshData }) => {
   const [emojiIcon, setEmojiIcon] = useState("😍");
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [name, setName] = useState("");
@@ -38,6 +38,7 @@ const CreateBudget = () => {
       })
       .returning({ insertedId: Budgets.id });
     if (result) {
+      refreshData();
       toast(name + " New Budget Created");
     }
   };
@@ -45,7 +46,7 @@ const CreateBudget = () => {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className="bg-slate-100 p-10 rounded-md items-center flex flex-col border-2 border-dashed cursor-pointer shadow-md ">
+          <div className="bg-slate-100 p-10 rounded-md items-center flex flex-col border-2 border-dashed cursor-pointer shadow hover:shadow-md ">
             <h2 className="text-3xl">+</h2>
             <h2 className="text-xl">Create New Budget</h2>
           </div>
@@ -84,7 +85,7 @@ const CreateBudget = () => {
                 <h2 className="text-black font-medium my-1">Budget Amount</h2>
                 <Input
                   type="number"
-                  placeholder="e.g. 5000 ₹"
+                  placeholder="e.g. ₹ 5000"
                   onChange={(e) => setAmount(e.target.value)}
                 />
               </div>

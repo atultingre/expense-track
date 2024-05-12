@@ -36,10 +36,16 @@ const SideNav = () => {
   ];
   return (
     <div className="h-screen p-5 border shadow-sm">
-      <Image className="pb-5 mx-auto" src={"/logo.png"} width={50} height={50} />
+      <Image
+        className="pb-5 mx-auto"
+        src={"/logo.png"}
+        width={50}
+        height={50}
+        alt="logo"
+      />
       <div>
         {menuList.map((menu, index) => (
-          <Link href={menu.path}>
+          <Link href={menu.path} key={menu.id}>
             <h2
               className={`flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-primary my-2 hover:bg-blue-100 ${
                 path === menu.path && "text-primary bg-blue-100"
