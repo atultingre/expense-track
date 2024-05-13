@@ -5,12 +5,18 @@ import { db } from "@/utils/dbConfig";
 import { Budgets, Expenses } from "@/utils/schema";
 import { toast } from "sonner";
 import moment from "moment";
+import { Loader } from "lucide-react";
 
 const AddExpense = ({ budgetId, user, refreshData }) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  /**
+   * Used to add new expenses
+   */
   const addNewExpense = async () => {
+    setLoading(true);
     const result = await db
       .insert(Expenses)
       .values({
@@ -23,11 +29,13 @@ const AddExpense = ({ budgetId, user, refreshData }) => {
     console.log("result addNewExpense: ", result);
 
     if (result) {
-      setName(" ");
-      setAmount(" ");
+      setName("");
+      setAmount("");
+      setLoading(false);
       refreshData();
       toast("New Expense Added!");
     }
+    setLoading(false);
   };
 
   return (
@@ -36,6 +44,7 @@ const AddExpense = ({ budgetId, user, refreshData }) => {
       <div className="mt-2">
         <h2 className="text-black font-medium my-1">Expense Name</h2>
         <Input
+          value={name}
           placeholder="e.g. Bedroom Decor"
           onChange={(e) => setName(e.target.value)}
         />
@@ -44,16 +53,17 @@ const AddExpense = ({ budgetId, user, refreshData }) => {
         <h2 className="text-black font-medium my-1">Expense Amount</h2>
         <Input
           type="number"
+          value={amount}
           placeholder="e.g. ₹ 2000"
           onChange={(e) => setAmount(e.target.value)}
         />
       </div>
       <Button
-        disabled={!(name && amount)}
+        disabled={!(name && amount) || loading}
         onClick={() => addNewExpense()}
         className="mt-3 w-full"
       >
-        Add New Expense
+        {loading ? <Loader className="animate-spin" /> : "Add New Expense"}
       </Button>
     </div>
   );

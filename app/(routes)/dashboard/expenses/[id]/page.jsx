@@ -91,7 +91,7 @@ const ExpensesScreen = ({ params }) => {
   };
 
   const back = () => {
-    route.replace("/dashboard/budgets");
+    route.replace("/dashboard");
   };
 
   return (
@@ -144,7 +144,6 @@ const ExpensesScreen = ({ params }) => {
         />
       </div>
       <div className="mt-5">
-        <h2 className="font-bold text-lg">Latest Expenses</h2>
         <ExpenseListTable
           expensesList={expensesList}
           refreshData={() => getBudgetInfo()}
